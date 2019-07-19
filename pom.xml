@@ -46,24 +46,55 @@
 	<build>
 		<finalName>ken-tool</finalName>
 		<plugins>
-			<!-- tomcat7 runtime plugin version 2.2: tomcat 7.0.47, support WebSocket -->
 			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<path>/ken-tool</path>
-					<port>18664</port>
+					<target>1.8</target>
+					<source>1.8</source>
+					<compilerVersion>1.8</compilerVersion>
+					<!--<skipTests>true</skipTests>-->
 				</configuration>
 			</plugin>
 
+			<!-- 启动程序 -->
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>com.ken.tool.KenToolApplication</mainClass>
+							<!-- 防止manifest中引用snapshot版本的jar命名混乱 -->
+							<useUniqueVersions>false</useUniqueVersions>
+						</manifest>
+					</archive>
+					<excludes>
+						<exclude>*.xml</exclude>
+						<exclude>*.yml</exclude>
+					</excludes>
+					<skip>true</skip>
+					<!--<skipTests>true</skipTests>-->
 				</configuration>
+			</plugin>
+
+			<!-- assembly -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/tool/assembly.xml</descriptor>
+					</descriptors>
+					<!--<skipTests>true</skipTests>-->
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
