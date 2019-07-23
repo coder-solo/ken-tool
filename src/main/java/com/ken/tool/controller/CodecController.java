@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/codec")
 public class CodecController {
 
+	@GetMapping("/md5/encode")
+	public String encodeMd5(String value) {
+		return CodecUtils.encodeMd5(value);
+	}
+
 	@GetMapping("/base64/encode")
 	public String encodeBase64(String value) {
 		return CodecUtils.encodeBase64(value);

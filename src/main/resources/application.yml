@@ -7,5 +7,5 @@ spring:
     encoding.force: true
 
 #log4j
-logging:
-  config: config/log4j2.xml
+#logging:
+#  config: config/log4j2.xml
