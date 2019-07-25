@@ -9,6 +9,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/codec")
 public class CodecController {
 
+	@GetMapping("/sha1/encode")
+	public String encodeSha1(String value) {
+		return CodecUtils.encodeSha1(value);
+	}
+
+	@GetMapping("/sha256/encode")
+	public String encodeSha256(String value) {
+		return CodecUtils.encodeSha256(value);
+	}
+
+	@GetMapping("/sha384/encode")
+	public String encodeSha384(String value) {
+		return CodecUtils.encodeSha384(value);
+	}
+
+	@GetMapping("/sha512/encode")
+	public String encodeSha512(String value) {
+		return CodecUtils.encodeSha512(value);
+	}
+
 	@GetMapping("/md5/encode")
 	public String encodeMd5(String value) {
 		return CodecUtils.encodeMd5(value);
